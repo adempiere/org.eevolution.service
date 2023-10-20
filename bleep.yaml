@@ -16,6 +16,6 @@ templates:
     java:
       options:  --release 11
     scala:
-      options: -encoding  utf-8 -feature -language:existentials -language:implicitConversions -language:higherKinds -indent -explain --new-syntax -print-lines -deprecation -explain-types -Wunused:all -Wvalue-discard
+      options: -encoding  utf-8 -feature -language:existentials -language:implicitConversions -language:higherKinds -indent -explain -print-lines -deprecation -explain-types -Wunused:all -Wvalue-discard
       version: 3.3.1
       strict: true
