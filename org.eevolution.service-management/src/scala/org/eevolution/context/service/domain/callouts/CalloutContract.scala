@@ -172,16 +172,18 @@ class CalloutContract extends CalloutEngine {
     import org.adempiere.core.domains.models.I_S_Contract
     val contract = GridTabWrapper.create(gridTab, classOf[I_S_Contract])
     val priceListId = contract.getM_PriceList_ID
-    if priceListId < 0 then return ""
+    if priceListId <= 0 then return ""
 
     val priceList = MPriceList.get(context, priceListId, null)
     val isTaxIncluded = priceList.isTaxIncluded
     val currencyId = priceList.getC_Currency_ID
     val contractDate = Env.getContextAsDate(context, windowNo, I_S_Contract.COLUMNNAME_DateContract)
-    val priceListVersion = priceList.getPriceListVersion(contractDate)
     contract.setIsTaxIncluded(isTaxIncluded)
     contract.setC_Currency_ID(currencyId)
-    Env.setContext(context, windowNo, "M_PriceList_Version_ID", priceListVersion.get_ID())
+    val priceListVersion =  priceList.getPriceListVersion(contractDate)
+    if priceListVersion != null then {
+    	Env.setContext(context, windowNo, "M_PriceList_Version_ID", priceListVersion.get_ID())
+    }
     ""
   }
 
